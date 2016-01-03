@@ -1,67 +1,32 @@
-<!DOCTYPE html>
 <html>
-
 <head>
-    <meta charset="UTF-8">
-    <title>Hello World!</title>
+    <link rel="stylesheet" type="text/css" href="./static/css/index.css" />
+    <link rel="stylesheet" type="text/css" href="./bower_components/angular-material/angular-material.css" />
+    <title>Database Project</title>
 </head>
-
-<body>
-    <h1>Hello World!</h1> We are using node
-    <script>
-    document.write(process.versions.node)
-    </script>, Chrome
-    <script>
-    document.write(process.versions.chrome)
-    </script>, and Electron
-    <script>
-    document.write(process.versions.electron)
-    </script>.
-    <button type="button">Click Me!</button>
-    <script>
-    var myNotification = new Notification('Title', {
-        body: 'Lorem Ipsum Dolor Sit Amet'
-    });
-
-    myNotification.onclick = function() {
-        console.log('Notification clicked')
-    }
-    </script>
-    <div id="holder">
-		<br/>
-		Drag your file here
-		<br/>
+<body ng-app="database" ng-cloak>
+    <script src="./bower_components/angular/angular.js" type="text/javascript" ></script>
+    <script src="./bower_components/angular-route/angular-route.js" type="text/javascript" ></script>
+    <script src="./bower_components/angular-animate/angular-animate.js" type="text/javascript" ></script>
+    <script src="./bower_components/angular-aria/angular-aria.js" type="text/javascript" ></script>
+    <script src="./bower_components/angular-material/angular-material.js" type="text/javascript" ></script>
+    <script src="./bower_components/angular-messages/angular-messages.js" type="text/javascript" ></script>
+    <script src="./static/js/controller.js"></script>
+    <div class="view-animate-container" ng-controller="MainCtrl">
+        <div ng-view class="view-animate">
+        </div>
     </div>
-    <script>
-    var holder = document.getElementById('holder');
-    holder.ondragover = function() {
-        return false;
-    };
-    holder.ondragleave = holder.ondragend = function() {
-        return false;
-    };
-    holder.ondrop = function(e) {
-        e.preventDefault();
-        var file = e.dataTransfer.files[0];
-        console.log('File you dragged here is', file.path);
-        return false;
-    };
-</script>
-<script>
-	const remote = require('electron').remote;
-	const Menu = remote.Menu;
-	const MenuItem = remote.MenuItem;
-
-	var menu = new Menu();
-	menu.append(new MenuItem({ label: 'MenuItem1', click: function() { console.log('item 1 clicked'); } }));
-	menu.append(new MenuItem({ type: 'separator' }));
-	menu.append(new MenuItem({ label: 'MenuItem2', type: 'checkbox', checked: true }));
-
-	window.addEventListener('contextmenu', function (e) {
-		  e.preventDefault();
-		    menu.popup(remote.getCurrentWindow());
-		}, false);
-	</script>
+    <!--
+    <div ng-controller="databaseLoginCtrl">
+        <form name="loginForm" ng-submit="submit()" id="loginForm">
+            <p>User Name: <input type="text" name="userName" ng-model="login.username" required /> </p>
+            <p>Pass Word: <input type="text" name="password" ng-model="login.password" required /> </p>
+            <input type="submit" value="Submit" ng-disabled="loginForm.$invalid" />
+        </form>
+        <div id="loginLoading" ng-show="loginLoading">
+            <p> Login... please wait.</p>
+        </div>
+    </div>
+    -->
 </body>
-
 </html>

@@ -1,0 +1,35 @@
+<div class="patientRegisterWrap" ng-controller="PatientRegisterCtrl" ng-cloak class="md-inline-form">
+	<md-content layout="column" layout-wrap layout-align="center center" class="patientRegisterForm">
+		<div layout="row">
+			<md-input-container>
+				<label>账号</label>
+				<input ng-nodel="patient.username" class="md-block">
+			</md-input-container>
+			<md-input-container>
+				<label>密码</label>
+				<input ng-nodel="patient.password" class="md-block">
+			</md-input-container>
+		</div>
+		<div layout="row">
+			<md-input-container>
+				<label>姓名</label>
+				<input ng-nodel="patient.name" class="md-block">
+			</md-input-container>
+			<md-input-container>
+				<label>身份证号</label>
+				<input ng-nodel="patient.identification" class="md-block">
+			</md-input-container>
+		</div>
+		<div layout="row">
+			<md-input-container>
+				<label>手机号码</label>
+				<input ng-nodel="patient.phone" class="md-block">
+			</md-input-container>
+			<md-datepicker ng-model="myDate" md-placeholder="Enter date" md-max-date="maxDate"></md-datepicker>
+		</div>
+		<div layout="row">
+				<md-button class="md-raised md-warn" ng-click="quit()">返回</md-button>
+				<md-button class="md-raised md-primary" ng-click="register()">注册</md-button>
+		</div>
+	</md-content>
+</div>
