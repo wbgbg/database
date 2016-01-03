@@ -87,23 +87,86 @@ angular.module('database', ['ngRoute', 'ngAnimate', 'ngMaterial', 'ngMessages'])
             $location.url('/patient/login');  
         }
     }])
-    .controller('PatientPanelCtrl', ['$scope', '$routeParams', '$location', function($scope, $routeParams, $location) {
+    .controller('PatientPanelCtrl', ['$scope', '$routeParams', '$location', '$mdDialog', function($scope, $routeParams, $location, $mdDialog) {
         this.name = "PatientPanelCtrl";
         this.params = $routeParams;
-        $scope.book = [{
-            who:'a',
-            what:'b',
-            notes:'c'
+        console.log('PatientPanelCtrl');
+        $scope.quit = function() {
+            console.log('enterWelcomePage')
+            $location.url('/');
+        }
+        $scope.book = function(ev) {
+            $mdDialog.show({
+              controller: 'PatientBookDialogCtrl',
+              templateUrl: 'static/view/patientBookDialog.html',
+              parent: angular.element(document.body),
+              targetEvent: ev,
+              clickOutsideToClose:true
+            })
+            .then(function(booking) {
+                booking.statue = 4;
+                booking.place = '000';
+                $scope.bookData.push(booking);
+            }, function() {
+              console.log('cancel');
+            });
+        }
+        $scope.bookData = [{
+            department:'内科',
+            doctorName:'常医生',
+            date:'2016.1.13',
+            clock:'14:20',
+            place:'210',
+            statue:'1'
         },{
-            who:'a1',
-            what:'b1',
-            notes:'c1'
+            department:'五官科',
+            doctorName:'赵医生',
+            date:'2016.1.14',
+            clock:'14:20',
+            place:'311',
+            statue:'2'
         },{
-            who:'a2',
-            what:'b22',
-            notes:'c2'
+            department:'外科',
+            doctorName:'于医生',
+            date:'2016.1.16',
+            clock:'10:30',
+            place:'110',
+            statue:'2'
+        },{
+            department:'外科',
+            doctorName:'王医生',
+            date:'2016.1.21',
+            clock:'13:30',
+            place:'110',
+            statue:'3'
+        },{
+            department:'影像科',
+            doctorName:'于医生',
+            date:'2016.2.11',
+            clock:'15:30',
+            place:'310',
+            statue:'4'
         }
         ];
+    }])
+    .controller('PatientBookDialogCtrl', ['$scope', '$routeParams', '$mdDialog', function($scope, $routeParams, $mdDialog) {
+        this.name = "DoctorLoginCtrl";
+        this.params = $routeParams;
+        $scope.booking = {
+            department: '',
+            doctorName: '',
+            date: '',
+            clock: ''
+        }
+        $scope.hide = function() {
+            $mdDialog.hide();
+        };
+        $scope.cancel = function() {
+            $mdDialog.cancel();
+        };
+        $scope.answer = function(answer) {
+            $mdDialog.hide($scope.booking);
+        };
     }])
     .controller('DoctorLoginCtrl', ['$routeParams', function($routeParams) {
         console.log('welcome');
