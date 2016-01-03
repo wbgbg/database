@@ -2,9 +2,9 @@
     <div class="PatientPanel">
         <md-content layout="column">
             <md-tabs md-dynamic-height md-border-bottom>
-                <md-tab label="one">
+                <md-tab label="已挂号">
                     <md-list>
-                        <md-subheader class="md-no-sticky">已挂号</md-subheader>
+                        <md-subheader class="md-no-sticky"></md-subheader>
                         <md-list-item class="md-3-line" ng-repeat="item in book">
                             <div class="md-list-item-text" layout="column">
                                 <h3>{{ item.who }}</h3>
@@ -15,9 +15,18 @@
                         <md-divider></md-divider>
                     </md-list>
                 </md-tab>
+                <md-tab label="挂号中">
+                </md-tab>
+                <md-tab label="已预约">
+                </md-tab>
+                <md-tab label="预约中">
+                </md-tab>
             </md-tabs>
-            <md-tab label="two">
-            </md-tab>
-        </md-content>
+            <div layout="row" layout-align="center center">
+              <md-button class="md-raised md-warn" ng-click="quit()">退出</md-button>
+              <md-button class="md-raised md-primary" ng-click="book()">预约</md-button>
+            </div>
     </div>
+    </md-content>
+</div>
 </div>

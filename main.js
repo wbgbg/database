@@ -34,6 +34,7 @@ app.on('ready', function() {
 
   // Open the DevTools.
   mainWindow.webContents.openDevTools();
+  mainWindow.setMenu(null);
 
   mainWindow.webContents.on('did-finish-load', function () {
     mainWindow.show();
