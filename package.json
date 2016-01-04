@@ -24,6 +24,9 @@
   "homepage": "https://github.com/atom/electron-quick-start#readme",
   "devDependencies": {
     "electron-prebuilt": "^0.36.0",
-	"jquery":"2.1.4"
+    "jquery": "2.1.4"
+  },
+  "dependencies": {
+    "mysql": "^2.10.0"
   }
 }

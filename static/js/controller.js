@@ -1,3 +1,5 @@
+const ipcRenderer = require('electron').ipcRenderer;
+
 angular.module('database', ['ngRoute', 'ngAnimate', 'ngMaterial', 'ngMessages'])
     .config(['$routeProvider', '$locationProvider',
         function($routeProvider, $locationProvider) {
@@ -52,7 +54,7 @@ angular.module('database', ['ngRoute', 'ngAnimate', 'ngMaterial', 'ngMessages'])
         this.params = $routeParams;
     }])
     .controller('PatientLoginCtrl', ['$scope', '$routeParams', '$location', function($scope, $routeParams, $location) {
-        console.log('welcome');
+        console.log('patientLogin');
         this.name = "PatientLoginCtrl";
         this.params = $routeParams;
         $scope.patient = {
@@ -75,9 +77,9 @@ angular.module('database', ['ngRoute', 'ngAnimate', 'ngMaterial', 'ngMessages'])
         };
         $scope.myDate = new Date();
         $scope.maxDate = new Date(
-          $scope.myDate.getFullYear(),
-          $scope.myDate.getMonth(),
-          $scope.myDate.getDate()
+            $scope.myDate.getFullYear(),
+            $scope.myDate.getMonth(),
+            $scope.myDate.getDate()
         );
         $scope.register = function() {
             $location.url('/patient/panel')
@@ -91,11 +93,21 @@ angular.module('database', ['ngRoute', 'ngAnimate', 'ngMaterial', 'ngMessages'])
         this.name = "PatientPanelCtrl";
         this.params = $routeParams;
         console.log('PatientPanelCtrl');
+        ipcRenderer.on('addBook-reply', function(event, result) {
+            console.log('added');
+            ipcRenderer.send('fetchBook');
+        });
+        ipcRenderer.on('fetchBook-reply', function(event, booked) {
+            console.log('fetched');
+            $scope.bookData = booked;
+            $scope.$apply();
+        })
         $scope.quit = function() {
             console.log('enterWelcomePage')
             $location.url('/');
         }
         $scope.book = function(ev) {
+            console.log('trigger book event');
             $mdDialog.show({
               controller: 'PatientBookDialogCtrl',
               templateUrl: 'static/view/patientBookDialog.html',
@@ -106,11 +118,16 @@ angular.module('database', ['ngRoute', 'ngAnimate', 'ngMaterial', 'ngMessages'])
             .then(function(booking) {
                 booking.statue = 4;
                 booking.place = '000';
-                $scope.bookData.push(booking);
+                console.log('send');
+                ipcRenderer.send('addBook', booking)
+
             }, function() {
               console.log('cancel');
             });
         }
+        $scope.bookData = [];
+        ipcRenderer.send('fetchBook');
+        /* mock data
         $scope.bookData = [{
             department:'内科',
             doctorName:'常医生',
@@ -148,9 +165,11 @@ angular.module('database', ['ngRoute', 'ngAnimate', 'ngMaterial', 'ngMessages'])
             statue:'4'
         }
         ];
+        */
     }])
     .controller('PatientBookDialogCtrl', ['$scope', '$routeParams', '$mdDialog', function($scope, $routeParams, $mdDialog) {
-        this.name = "DoctorLoginCtrl";
+        console.log('PatientBookDialogCtrl');
+        this.name = "PatientBookDialogCtrl";
         this.params = $routeParams;
         $scope.booking = {
             department: '',
@@ -169,7 +188,7 @@ angular.module('database', ['ngRoute', 'ngAnimate', 'ngMaterial', 'ngMessages'])
         };
     }])
     .controller('DoctorLoginCtrl', ['$routeParams', function($routeParams) {
-        console.log('welcome');
+        console.log('DoctorLoginCtrl');
         this.name = "DoctorLoginCtrl";
         this.params = $routeParams;
     }]);
