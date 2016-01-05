@@ -3,6 +3,7 @@ const electron = require('electron');
 const app = electron.app; // Module to control application life.
 const BrowserWindow = electron.BrowserWindow; // Module to create native browser window.
 const ipcMain = require('electron').ipcMain;
+const Promise = require('bluebird');
 const mysql = require('mysql');
 const connection = mysql.createConnection({
     host: 'rds335ci91et4bh3g5w3.mysql.rds.aliyuncs.com',
@@ -11,6 +12,7 @@ const connection = mysql.createConnection({
     password: 'changshendiao',
     database: 'hospital'
 });
+Promise.promisifyAll(require("mysql/lib/Connection").prototype);
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow;
@@ -39,26 +41,21 @@ app.on('ready', function() {
 
     ipcMain.on('addBook', function(event, booking) {
         console.log('addbook'); // prints "ping"
-        connection.query('INSERT INTO testBook (patientId, department, doctorName, date, clock, place, statue) values (?,?,?,?,?,?,?)', [1, booking.department, booking.doctorName, booking.date, booking.clock, booking.place, 4], function(err, rows) {
-            if (err) {
-                return connection.rollback(function() {
-                    throw err;
-                });
-            }
-            event.sender.send('addBook-reply', rows);
-        });
+        connection.queryAsync('INSERT INTO testBook (patientId, department, doctorName, date, clock, place, statue) values (?,?,?,?,?,?,?)', [1, booking.department, booking.doctorName, booking.date, booking.clock, booking.place, 4])
+        .then(function(ans) {
+            event.sender.send('addBook-reply', ans);
+        },function(err) {
+            console.log(err);
+        })
     });
 
     ipcMain.on('fetchBook', function(event) {
-        console.log('fetchbook'); // prints "ping"
-        connection.query('SELECT * FROM testBook', function(err, results, fields) {
-            if (err) {
-                return connection.rollback(function() {
-                    throw err;
-                });
-            }
-            console.log(results);
-            event.sender.send('fetchBook-reply', results);
+        console.log('fetchBook'); // prints "ping"
+        connection.queryAsync('SELECT * FROM testBook')
+        .then(function(ans) {
+            event.sender.send('fetchBook-reply', ans);
+        },function(err) {
+            console.log(err);
         });
     });
     // and load the index.html of the app.
