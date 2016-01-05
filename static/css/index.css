@@ -51,6 +51,13 @@ body {
 	overflow: hidden;
 }
 
+.quitbutton {
+  position:fixed;
+  left:0px;
+  top:0px;
+  z-index: 1000;
+}
+
 /*
 starting welcomePage
 */
@@ -82,8 +89,16 @@ starting patientRegister
 starting patientPanel
 */
 .patientPanel {
-  width:37%;
+  width:40%;
   margin:0 auto;
+}
+
+.patientPanelTabs {
+  height:80%;
+}
+
+.patientBookDialogWrap {
+  width:40%;
 }
 
 md-datepicker {
@@ -118,5 +133,4 @@ img {
 .view-animate.ng-leave.ng-leave-active {
   top:-100%;
 }
-
 */

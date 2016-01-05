@@ -1,36 +1,42 @@
 <div class="patientRegisterWrap" ng-cloak class="md-inline-form">
-    <md-content layout="column" layout-wrap layout-align="center center" class="patientRegisterForm">
-        <div layout="row">
-            <md-input-container>
-                <label>账号</label>
-                <input ng-model="patient.username" class="md-block">
-            </md-input-container>
-            <md-input-container>
-                <label>密码</label>
-                <input ng-model="patient.password" class="md-block">
-            </md-input-container>
-        </div>
-        <div layout="row">
-            <md-input-container>
-                <label>姓名</label>
-                <input ng-model="patient.name" class="md-block">
-            </md-input-container>
-            <md-input-container>
-                <label>身份证号</label>
-                <input ng-model="patient.identification" class="md-block">
-            </md-input-container>
-        </div>
-        <div layout="row">
-            <md-input-container>
-                <label>手机号码</label>
-                <input ng-model="patient.phone" class="md-block">
-            </md-input-container>
-            <h3>出生日期</h3>
-            <md-datepicker ng-model="patient.birthday" md-placeholder="Enter date" md-max-date="maxDate"></md-datepicker>
-        </div>
-        <div layout="row">
-            <md-button class="md-raised md-warn" ng-click="quit()">返回</md-button>
-            <md-button class="md-raised md-primary" ng-click="register()">注册</md-button>
-        </div>
+    <md-content layout="column" layout-align="center center" class="patientRegisterForm">
+        <form ng-submit="register()">
+            <div layout="row">
+                <md-input-container>
+                    <label>账号</label>
+                    <input ng-model="patient.username" class="md-block" required>
+                </md-input-container>
+                <div flex="30"></div>
+                <md-input-container>
+                    <label>密码</label>
+                    <input ng-model="patient.password" class="md-block" required>
+                </md-input-container>
+            </div>
+            <div layout="row">
+                <md-input-container>
+                    <label>姓名</label>
+                    <input ng-model="patient.patientName" class="md-block" required>
+                </md-input-container>
+                <div flex="30"></div>
+                <md-input-container>
+                    <label>身份证号</label>
+                    <input ng-model="patient.identification" class="md-block" required>
+                </md-input-container>
+            </div>
+            <div layout="row">
+                <md-input-container>
+                    <label>手机号码</label>
+                    <input ng-model="patient.phone" class="md-block" required>
+                </md-input-container>
+                <div flex="30"></div>
+                <div layout="column">
+                    <md-datepicker ng-model="birthday" md-placeholder="出生日期" md-max-date="maxDate" required></md-datepicker>
+                </div>
+            </div>
+            <div layout="row" layout-align="center center">
+                <back-button></back-button>
+                <md-button class="md-raised md-primary" type="submit">注册</md-button>
+            </div>
+        </form>
     </md-content>
 </div>

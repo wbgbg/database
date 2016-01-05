@@ -1,7 +1,7 @@
 <div class="patientPanelWrap">
-    <div class="PatientPanel">
-        <md-content layout="column">
-            <md-tabs md-dynamic-height md-border-bottom>
+    <div class="patientPanel">
+        <md-content layout="column" class="md-padding">
+            <md-tabs md-border-bottom class="patientPanelTabs">
                 <md-tab label="已挂号">
                     <md-list>
                         <md-list-item class="md-3-line" ng-repeat="item in bookData | filter:{statue : '1'}">
@@ -14,7 +14,7 @@
                     </md-list>
                 </md-tab>
                 <md-tab label="挂号中">
-                <md-list>
+                    <md-list>
                         <md-list-item class="md-3-line" ng-repeat="item in bookData | filter:{statue : '2'}">
                             <div class="md-list-item-text" layout="column">
                                 <h3>{{ item.department }}</h3>
@@ -25,7 +25,7 @@
                     </md-list>
                 </md-tab>
                 <md-tab label="已预约">
-                <md-list>
+                    <md-list>
                         <md-list-item class="md-3-line" ng-repeat="item in bookData | filter:{statue : '3'}">
                             <div class="md-list-item-text" layout="column">
                                 <h3>{{ item.department }}</h3>
@@ -36,7 +36,7 @@
                     </md-list>
                 </md-tab>
                 <md-tab label="预约中">
-                <md-list>
+                    <md-list>
                         <md-list-item class="md-3-line" ng-repeat="item in bookData | filter:{statue : '4'}">
                             <div class="md-list-item-text" layout="column">
                                 <h3>{{ item.department }}</h3>
@@ -48,10 +48,8 @@
                 </md-tab>
             </md-tabs>
             <div layout="row" layout-align="center center">
-              <quit-button></quit-button>
-              <md-button class="md-raised md-primary" ng-click="book($event)">预约</md-button>
+                <md-button class="md-raised md-primary" ng-click="book($event)">预约</md-button>
             </div>
-    </div>
     </md-content>
 </div>
 </div>

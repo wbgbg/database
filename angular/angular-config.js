@@ -1,3 +1,5 @@
+const ipcRenderer = require('electron').ipcRenderer;
+
 angular.module('database', ['ngRoute', 'ngAnimate', 'ngMaterial', 'ngMessages'])
     .config(['$routeProvider', '$locationProvider',
         function($routeProvider, $locationProvider) {

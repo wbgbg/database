@@ -16,27 +16,20 @@
     <script src="./angular/MainCtrl.js"></script>
     <script src="./angular/WelcomeCtrl.js"></script>
     <script src="./angular/public/service/bookService.js"></script>
+    <script src="./angular/public/service/patientUserService.js"></script>
+    <script src="./angular/public/service/toastService.js"></script>
+    <script src="./angular/public/directive/backButton.js"></script>
     <script src="./angular/public/directive/quitButton.js"></script>
     <script src="./angular/doctor/doctorLogin/DoctorLoginCtrl.js"></script>
     <script src="./angular/patient/patientLogin/patientLoginCtrl.js"></script>
     <script src="./angular/patient/patientPanel/patientPanelCtrl.js"></script>
     <script src="./angular/patient/patientPanel/patientBookDialogCtrl.js"></script>
     <script src="./angular/patient/patientRegister/patientRegisterCtrl.js"></script>
+    <quit-button class="quitbutton">
+    </quit-button>
     <div class="view-animate-container" ng-controller="MainCtrl">
         <div ng-view class="view-animate">
         </div>
     </div>
-    <!--
-    <div ng-controller="databaseLoginCtrl">
-        <form name="loginForm" ng-submit="submit()" id="loginForm">
-            <p>User Name: <input type="text" name="userName" ng-model="login.username" required /> </p>
-            <p>Pass Word: <input type="text" name="password" ng-model="login.password" required /> </p>
-            <input type="submit" value="Submit" ng-disabled="loginForm.$invalid" />
-        </form>
-        <div id="loginLoading" ng-show="loginLoading">
-            <p> Login... please wait.</p>
-        </div>
-    </div>
-    -->
 </body>
 </html>

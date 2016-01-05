@@ -1,4 +1,4 @@
-<md-dialog aria-label="Mango (Fruit)" ng-cloak>
+<md-dialog aria-label="新预约" ng-cloak class="patientBookDialogWrap">
     <form>
         <md-toolbar>
             <div class="md-toolbar-tools">
@@ -11,23 +11,33 @@
         </md-toolbar>
         <md-dialog-content>
             <div class="md-dialog-content">
-                <md-content layout="column" layout-wrap layout-align="center center" class="patientBookDialogForm">
-                    <div layout="row">
+                <md-content layout="column" layout-align="space-around center" class="patientBookDialogForm" layout-padding>
+                    <div layout="row" layout-padding>
                         <md-input-container>
                             <label>科室</label>
-                            <input ng-model="booking.department" class="md-block">
+                            <md-select ng-model="booking.department">
+                                <md-option ng-repeat="department in optionalDepartment" value="{{department}}">
+                                    {{department}}
+                                </md-option>
+                            </md-select>
                         </md-input-container>
+                        <div flex="30"></div>
                         <md-input-container>
                             <label>医生</label>
-                            <input ng-model="booking.doctorName" class="md-block">
+                            <md-select ng-model="booking.doctorName">
+                                <md-option ng-repeat="doctorName in optionalDoctor" value="{{doctorName}}">
+                                    {{doctorName}}
+                                </md-option>
+                            </md-select>
                         </md-input-container>
                     </div>
                     <div layout="row">
-                        <h4>日期</h4>
                         <md-datepicker ng-model="date" md-placeholder="Enter date"
                             md-min-date="minDate" md-max-date="maxDate" md-date-filter="onlyWeekdaysPredicate">
                         </md-datepicker>
-                        <md-input-container>
+                    </div>
+                    <div layout="row" layout-align="space-around center" layout-padding >
+                        <md-input-container layout="column">
                             <label>小时</label>
                             <md-select ng-model="booking.clock">
                                 <md-option ng-repeat="clock in optionalClock" value="{{clock}}">
@@ -35,7 +45,8 @@
                                 </md-option>
                             </md-select>
                         </md-input-container>
-                        <md-input-container>
+                        <div flex="30"></div>
+                        <md-input-container layout="column">
                             <label>分</label>
                             <md-select ng-model="booking.minute">
                                 <md-option ng-repeat="minute in optionalMinute" value="{{minute}}">

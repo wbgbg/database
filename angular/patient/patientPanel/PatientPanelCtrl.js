@@ -1,6 +1,6 @@
 angular.module('database')
-    .controller('PatientPanelCtrl', ['$scope', '$routeParams', '$location', '$mdDialog', 'bookService',
-        function($scope, $routeParams, $location, $mdDialog, bookService) {
+    .controller('PatientPanelCtrl', ['$scope', '$routeParams', '$location', '$mdDialog', 'bookService', 'patientUserService',
+        function($scope, $routeParams, $location, $mdDialog, bookService, patientUserService) {
             this.name = "PatientPanelCtrl";
             this.params = $routeParams;
             console.log('PatientPanelCtrl');
@@ -16,6 +16,8 @@ angular.module('database')
                     .then(function(booking) {
                         booking.statue = 4;
                         booking.place = '000';
+                        booking.patientId = patientUserService.current().patientId;
+                        console.log(booking);
                         console.log('send');
                         //ipcRenderer.send('addBook', booking)
                         bookService.addBook(booking);
