@@ -1,19 +1,23 @@
 <div class="doctorLoginWrap" ng-cloak class="md-inline-form">
 	<md-content layout="column" layout-wrap layout-align="center center" class="doctorLoginForm">
-		<div layout="row">
-			<md-input-container>
-				<label>账号</label>
-				<input ng-model="doctor.username" class="md-block">
-			</md-input-container>
-		</div>
-		<div layout="row">
-			<md-input-container>
-				<label>密码</label>
-				<input ng-model="doctor.password" class="md-block">
-			</md-input-container>
-		</div>
-		<div layout="row">
-				<md-button class="md-raised md-primary" ng-click="doctorLogin()">登陆</md-button>
-		</div>
+		<form ng-submit="login()">
+			<div layout="row">
+				<md-input-container>
+					<label>账号</label>
+					<input ng-model="doctor.username" class="md-block" required>
+				</md-input-container>
+			</div>
+			<div layout="row">
+				<md-input-container>
+					<label>密码</label>
+					<input ng-model="doctor.password" class="md-block" required>
+				</md-input-container>
+			</div>
+			<div layout="row">
+				<div layout="column">
+					<md-button class="md-raised md-primary" type="submit">登陆</md-button>
+				</div>
+			</div>
+		</form>
 	</md-content>
 </div>

@@ -82,6 +82,22 @@ app.on('ready', function() {
         });
     });
 
+    ipcMain.on('doctorLogin', function(event, user) {
+        console.log('doctorLogin');
+        console.log(sha1sum(user.password));
+        connection.queryAsync('SELECT * FROM testDoctorUser WHERE username=\'' + user.username + '\'')
+        .then(function(ans) {
+            console.log(ans[0]);
+            if (ans[0] && (ans[0].password == sha1sum(user.password))) {
+                event.sender.send('doctorLogin-reply',ans[0]);
+            } else {
+                event.sender.send('doctorLogin-reply');
+            }
+        },function(err) {
+            console.log(err);
+        });
+    });
+
     ipcMain.on('patientRegister', function(event, user) {
         console.log('patientRegister');
         connection.queryAsync('INSERT INTO testPatientUser (username, password, patientName, identification, phone, birthday) values (?,?,?,?,?,?)', [user.username, sha1sum(user.password), user.patientName, user.identification, user.phone, user.birthday])
