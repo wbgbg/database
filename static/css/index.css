@@ -30,13 +30,15 @@
 .material-icons.md-48 { font-size: 48px; }
 
 // Rules for using icons as black on a light background.
-.material-icons.md-dark { color: rgba(0, 0, 0, 0.54); }
-.material-icons.md-dark.md-inactive { color: rgba(0, 0, 0, 0.26); }
+.material-icons.md-dark { color: rgba(0, 0, 0, 0.54) !important; }
+.material-icons.md-dark.md-inactive { color: rgba(0, 0, 0, 0.26) !important; }
 
 // Rules for using icons as white on a dark background.
 .material-icons.md-light { color: rgba(255, 255, 255, 1); }
 .material-icons.md-light.md-inactive { color: rgba(255, 255, 255, 0.3); }
 
+md-icon.material-icons.md-dark { color: rgba(0, 0, 0, 0.54) !important; }
+md-icon.material-icons.md-dark.md-inactive { color: rgba(0, 0, 0, 0.26) !important; }
 /*
 .view-animate {
 	height:600px;
@@ -50,10 +52,12 @@
 body {
 	overflow: hidden;
 }
-
-.quitbutton {
+.patientList {
+  width:200px;
+}
+.menu-button {
   position:fixed;
-  left:0px;
+  right:0px;
   top:0px;
   z-index: 1000;
 }
@@ -107,6 +111,16 @@ md-datepicker {
 
 img {
 	width: 100%;
+}
+
+.treatmentArea {
+  resize: none;
+  height:80px !important;
+}
+
+.drugList {
+  overflow: scroll;
+  max-height: 200px !important;
 }
 
 .view-animate.ng-enter, .view-animate.ng-leave {

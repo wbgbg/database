@@ -1,11 +1,12 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <link rel="stylesheet" type="text/css" href="./static/css/index.css" />
     <link rel="stylesheet" type="text/css" href="./bower_components/angular-material/angular-material.css" />
+    <link rel="stylesheet" type="text/css" href="./static/css/index.css" />
     <title>Database Project</title>
 </head>
 <body ng-app="database" ng-cloak>
+    <script src="./static/js/lodash.min.js"></script>
     <script src="./bower_components/angular/angular.js" type="text/javascript" ></script>
     <script src="./bower_components/angular-route/angular-route.js" type="text/javascript" ></script>
     <script src="./bower_components/angular-animate/angular-animate.js" type="text/javascript" ></script>
@@ -20,14 +21,15 @@
     <script src="./angular/public/service/doctorUserService.js"></script>
     <script src="./angular/public/service/toastService.js"></script>
     <script src="./angular/public/directive/backButton.js"></script>
-    <script src="./angular/public/directive/quitButton.js"></script>
+    <script src="./angular/public/directive/menuButton.js"></script>
     <script src="./angular/doctor/doctorLogin/DoctorLoginCtrl.js"></script>
+    <script src="./angular/doctor/doctorPanel/DoctorPanelCtrl.js"></script>
     <script src="./angular/patient/patientLogin/patientLoginCtrl.js"></script>
     <script src="./angular/patient/patientPanel/patientPanelCtrl.js"></script>
     <script src="./angular/patient/patientPanel/patientBookDialogCtrl.js"></script>
     <script src="./angular/patient/patientRegister/patientRegisterCtrl.js"></script>
-    <quit-button class="quitbutton">
-    </quit-button>
+    <menu-button class="menu-button">
+    </menu-button>
     <div class="view-animate-container" ng-controller="MainCtrl">
         <div ng-view class="view-animate">
         </div>

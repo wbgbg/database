@@ -1,0 +1,20 @@
+<div class="menu-button" layout="row" layout-align="center center">
+    <md-fab-speed-dial md-open="isOpen" md-direction="down" ng-class="selectMode">
+        <md-fab-trigger>
+            <md-button aria-label="menu" class="md-fab md-warn">
+                <md-icon class="material-icons">menu</md-icon>
+            </md-button>
+        </md-fab-trigger>
+        <md-fab-actions>
+            <md-button aria-label="about" class="md-fab md-raised md-mini" ng-click="openInfo($event)">
+                <md-icon class="material-icons md-dark">info</md-icon>
+            </md-button>
+            <md-button aria-label="settings" class="md-fab md-raised md-mini" ng-click="openSetting()">
+                <md-icon class="material-icons md-dark">settings</md-icon>
+            </md-button>
+            <md-button aria-label="quit" class="md-fab md-raised md-mini" ng-click="exit()">
+                <md-icon class="material-icons md-dark">exit_to_app</md-icon>
+            </md-button>
+        </md-fab-actions>
+    </md-fab-speed-dial>
+</div>

@@ -19,15 +19,20 @@ angular.module('database', ['ngRoute', 'ngAnimate', 'ngMaterial', 'ngMessages'])
                     controller: 'PatientPanelCtrl',
                     controllerAs: 'patient'
                 })
+                .when('/patient/register', {
+                    templateUrl: 'angular/patient/patientRegister/PatientRegister.html',
+                    controller: 'PatientRegisterCtrl',
+                    controllerAs: 'patient'
+                })
                 .when('/doctor/login', {
                     templateUrl: 'angular/doctor/doctorLogin/doctorLogin.html',
                     controller: 'DoctorLoginCtrl',
                     controllerAs: 'doctor'
                 })
-                .when('/patient/register', {
-                    templateUrl: 'angular/patient/patientRegister/PatientRegister.html',
-                    controller: 'PatientRegisterCtrl',
-                    controllerAs: 'patient'
+                .when('/doctor/panel', {
+                    templateUrl: 'angular/doctor/doctorPanel/doctorPanel.html',
+                    controller: 'DoctorPanelCtrl',
+                    controllerAs: 'doctor'
                 });
 
         }

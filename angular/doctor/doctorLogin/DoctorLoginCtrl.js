@@ -11,8 +11,8 @@ angular.module('database')
             $scope.$on('doctorLogin',function(event, flag) {
                 console.log('received doctorLogin:', flag);
                 if (flag) {
-                    //$location.url('/doctor/panel');
-                    toastService.show('登录成功');
+                    $location.url('/doctor/panel');
+                    //toastService.show('登录成功');
                 } else {
                     toastService.show('登录失败');
                 }
