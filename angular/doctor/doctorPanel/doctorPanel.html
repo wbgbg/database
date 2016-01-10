@@ -8,7 +8,7 @@
                 <md-list-item class="md-2-line" ng-repeat="patient in patientList" ng-click="choosePatient(patient)">
                     <div class="md-list-item-text" layout="column">
                         <h3>{{ patient.patientName }}</h3>
-                        <h4>{{ patient.clock }}</h4>
+                        <h4>{{ patient.date }}</h4>
                     </div>
                     <md-divider inset></md-divider>
                 </md-list-item>
@@ -20,7 +20,7 @@
                     <md-card-title flex="initial">
                         <md-card-title-text>
                             <span class="md-headline">{{currentPatient.patientName}}</span>
-                            <span class="md-subhead">{{currentPatient.clock}}</span>
+                            <span class="md-subhead">{{currentPatient.date}}</span>
                         </md-card-title-text>
                         <md-card-title-media>
                             <img ng-src="{{imagePath}}" alt="head" class="md-media-sm">
@@ -60,7 +60,7 @@
                     <div layout="row">
                         <md-button class="md-raised md-primary" ng-click="addDrug(drug)">添加药品</md-button>
                         <div flex></div>
-                        <md-button class="md-raised md-warn" ng-click="submit()">提交诊断</md-button>
+                        <md-button class="md-raised md-warn" ng-click="submitTreatment()">提交诊断</md-button>
                     </div>
                 </div>
             </md-content>

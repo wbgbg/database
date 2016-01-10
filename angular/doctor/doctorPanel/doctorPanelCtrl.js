@@ -1,13 +1,15 @@
 angular.module('database')
-    .controller('DoctorPanelCtrl', ['$scope', '$routeParams',
-        function($scope, $routeParams) {
+    .controller('DoctorPanelCtrl', ['$scope', '$routeParams', 'doctorUserService', 'bookService', 'toastService',
+        function($scope, $routeParams, doctorUserService, bookService, toastService) {
             this.name = "doctorPanelCtrl";
             this.params = $routeParams;
             console.log('doctorPanelCtrl');
-            $scope.patientList = [{patientName:'常神',clock:'13:15'},{patientName:'常神2',clock:'13:45'}];
+            //$scope.patientList = [{patientName:'常神',clock:'13:15'},{patientName:'常神2',clock:'13:45'}];
+            $scope.patientList = [];
             $scope.currentPatient = {};
             $scope.imagePath = "./static/image/head.png";
-            $scope.currentPatient = {patientName: '未选择', clock: 'N/A'};
+            $scope.currentPatient = {patientName: '未选择', date: 'N/A'};
+            doctorUserService.getPatientList(doctorUserService.current().doctorId);
             $scope.choosePatient = function(patient) {
             	$scope.currentPatient = patient;
             	$scope.currentPatient.drugs = [];
@@ -26,7 +28,32 @@ angular.module('database')
             }
             $scope.addDrug = function(drug) {
             	console.log(drug);
-            	$scope.currentPatient.drugs.push({name:drug.selectedItem,quentity:drug.quantity});
+            	$scope.currentPatient.drugs.push({name:drug.selectedItem,quantity:drug.quantity});
             }
+            $scope.submitTreatment = function() {
+                bookService.addTreatment({
+                    patientId:$scope.currentPatient.patientId,
+                    doctorId:$scope.currentPatient.doctorId,
+                    bookId:$scope.currentPatient.bookId,
+                    description:$scope.currentPatient.treatment,
+                    drugs:$scope.currentPatient.drugs
+                });
+            }
+            $scope.$on('getPatientList', function(event) {
+                console.log('getPatientList');
+                console.log(doctorUserService.patientList());
+                $scope.patientList = doctorUserService.patientList();
+            })
+            $scope.$on('addTreatment', function(event, flag) {
+                console.log('addTreatment:', flag);
+                if (flag) {
+                    toastService.show('提交成功');
+                    $scope.currentPatient = {};
+                    $scope.drug = {};
+                    doctorUserService.getPatientList(doctorUserService.current().doctorId);
+                } else {
+                    toastService.show('提交失败');
+                }
+            })
         }    
     ]);;

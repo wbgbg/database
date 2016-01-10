@@ -1,47 +1,48 @@
 <div class="patientPanelWrap">
     <div class="patientPanel">
-        <md-content layout="column" class="md-padding">
+        <md-content layout="column">
             <md-tabs md-border-bottom class="patientPanelTabs">
                 <md-tab label="已挂号">
                     <md-list>
-                        <md-list-item class="md-3-line" ng-repeat="item in bookData | filter:{statue : '1'}">
+                        <md-list-item class="md-3-line" ng-repeat="item in bookData | filter:{statue : 1}">
                             <div class="md-list-item-text" layout="column">
                                 <h3>{{ item.department }}</h3>
                                 <h4>{{ item.doctorName }}</h4>
-                                <p>{{ item.date }} &nbsp; {{item.clock}} &nbsp;--&nbsp; {{item.place}}室 </p>
+                                <p>{{ item.date }}</p>
                             </div>
                         </md-list-item>
                     </md-list>
                 </md-tab>
                 <md-tab label="挂号中">
                     <md-list>
-                        <md-list-item class="md-3-line" ng-repeat="item in bookData | filter:{statue : '2'}">
+                        <md-list-item class="md-3-line" ng-repeat="item in bookData | filter:{statue : 2}">
                             <div class="md-list-item-text" layout="column">
                                 <h3>{{ item.department }}</h3>
                                 <h4>{{ item.doctorName }}</h4>
-                                <p>{{ item.date }} &nbsp; {{item.clock}} &nbsp;--&nbsp; {{item.place}}室 </p>
+                                <p>{{ item.date }}</p>
                             </div>
                         </md-list-item>
                     </md-list>
                 </md-tab>
                 <md-tab label="已预约">
                     <md-list>
-                        <md-list-item class="md-3-line" ng-repeat="item in bookData | filter:{statue : '3'}">
+                        <md-list-item class="md-3-line" ng-repeat="item in bookData | filter:{statue : 3}">
                             <div class="md-list-item-text" layout="column">
                                 <h3>{{ item.department }}</h3>
                                 <h4>{{ item.doctorName }}</h4>
-                                <p>{{ item.date }} &nbsp; {{item.clock}} &nbsp;--&nbsp; {{item.place}}室 </p>
+                                <p>{{ item.date }}</p>
+                                <md-button class="md-secondary md-raised md-primary" ng-click="guahao(item)">挂号</md-button>
                             </div>
                         </md-list-item>
                     </md-list>
                 </md-tab>
                 <md-tab label="预约中">
                     <md-list>
-                        <md-list-item class="md-3-line" ng-repeat="item in bookData | filter:{statue : '4'}">
+                        <md-list-item class="md-3-line" ng-repeat="item in bookData | filter:{statue : 4}">
                             <div class="md-list-item-text" layout="column">
                                 <h3>{{ item.department }}</h3>
                                 <h4>{{ item.doctorName }}</h4>
-                                <p>{{ item.date }} &nbsp; {{item.clock}} &nbsp;--&nbsp; {{item.place}}室 </p>
+                                <p>{{ item.date }}</p>
                             </div>
                         </md-list-item>
                     </md-list>
@@ -50,6 +51,6 @@
             <div layout="row" layout-align="center center">
                 <md-button class="md-raised md-primary" ng-click="book($event)">预约</md-button>
             </div>
-    </md-content>
-</div>
+        </md-content>
+    </div>
 </div>

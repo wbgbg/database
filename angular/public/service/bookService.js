@@ -2,12 +2,16 @@ angular.module('database')
     .factory('bookService',['$rootScope', 'patientUserService', function($rootScope, patientUserService) {
         var service = {
             book: [],
-            addBook : function(booking) {
+            addBook: function(booking) {
                 console.log(booking);
                 ipcRenderer.send('addBook', booking);
             },
-            fetchBook : function() {
+            fetchBook: function() {
                 ipcRenderer.send('fetchBook', patientUserService.current().patientId);
+            },
+            addTreatment: function(treatment) {
+                console.log('addTreatment');
+                ipcRenderer.send('addTreatment', treatment);
             }
         };
         ipcRenderer.on('addBook-reply', function(event, result) {
@@ -17,9 +21,18 @@ angular.module('database')
         ipcRenderer.on('fetchBook-reply', function(event, booked) {        
             console.log('fetched');
             service.book = booked;
+            console.dir(booked, {depth:null});
             $rootScope.$broadcast('bookService.fetch');
             //$scope.bookData = booked;
             //$scope.$apply();
         });
+        ipcRenderer.on('addTreatment-reply', function(event, flag) {
+            if (flag) {
+                $rootScope.$broadcast('addTreatment', true);
+            } else {
+                $rootScope.$broadcast('addTreatment', false);
+            }
+        })
+
         return service;
     }]);

@@ -1,0 +1,21 @@
+<div class="adminLoginWrap" ng-cloak class="md-inline-form">
+	<md-content layout="column" layout-wrap layout-align="center center" class="adminLoginForm">
+		<form ng-submit="login()">
+			<div layout="row">
+				<md-input-container>
+					<label>账号</label>
+					<input ng-model="admin.username" class="md-block" required>
+				</md-input-container>
+			</div>
+			<div layout="row">
+				<md-input-container>
+					<label>密码</label>
+					<input ng-model="admin.password" class="md-block" required>
+				</md-input-container>
+			</div>
+			<div layout="row" layout-align="center center">
+				<md-button class="md-raised md-primary" type="submit">登陆</md-button>
+			</div>
+		</form>
+	</md-content>
+</div>

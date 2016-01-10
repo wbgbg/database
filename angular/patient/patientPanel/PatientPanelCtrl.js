@@ -14,9 +14,12 @@ angular.module('database')
                         clickOutsideToClose: true
                     })
                     .then(function(booking) {
+                        console.log(booking);
                         booking.statue = 4;
-                        booking.place = '000';
                         booking.patientId = patientUserService.current().patientId;
+                        booking.doctor = JSON.parse(booking.doctor);
+                        booking.doctorId = booking.doctor.doctorId;
+                        booking.date = booking.date.replace(/\//g,'-') + ' ' + booking.clock +':00';
                         console.log(booking);
                         console.log('send');
                         //ipcRenderer.send('addBook', booking)

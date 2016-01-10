@@ -24,9 +24,9 @@
                         <div flex="30"></div>
                         <md-input-container>
                             <label>医生</label>
-                            <md-select ng-model="booking.doctorName">
-                                <md-option ng-repeat="doctorName in optionalDoctor" value="{{doctorName}}">
-                                    {{doctorName}}
+                            <md-select ng-model="booking.doctor">
+                                <md-option ng-repeat="doctor in optionalDoctor" value="{{doctor}}">
+                                    {{doctor.doctorName}}
                                 </md-option>
                             </md-select>
                         </md-input-container>
