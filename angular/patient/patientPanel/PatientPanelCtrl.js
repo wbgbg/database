@@ -1,6 +1,6 @@
 angular.module('database')
-    .controller('PatientPanelCtrl', ['$scope', '$routeParams', '$location', '$mdDialog', 'bookService', 'patientUserService',
-        function($scope, $routeParams, $location, $mdDialog, bookService, patientUserService) {
+    .controller('PatientPanelCtrl', ['$scope', '$routeParams', '$location', '$mdDialog', 'bookService', 'patientUserService', 'toastService',
+        function($scope, $routeParams, $location, $mdDialog, bookService, patientUserService, toastService) {
             this.name = "PatientPanelCtrl";
             this.params = $routeParams;
             console.log('PatientPanelCtrl');
@@ -29,10 +29,21 @@ angular.module('database')
                         console.log('cancel');
                     });
             }
+            $scope.guahao = function(item) {
+                bookService.updateBook({key:'statue',value:'2',bookId:item.bookId});
+            }
             $scope.bookData = [];
             $scope.$on('bookService.fetch', function(event) {
                 $scope.bookData = bookService.book;
                 $scope.$apply();
+            })
+            $scope.$on('bookService.update', function(event, flag) {
+                if (flag) {
+                    toastService.show('申请挂号成功');
+                } else {
+                    toastService.show('申请挂号失败');
+                }
+                bookService.fetchBook();
             })
             bookService.fetchBook();
         }

@@ -1,6 +1,6 @@
 angular.module('database')
-    .controller('DoctorPanelCtrl', ['$scope', '$routeParams', 'doctorUserService', 'bookService', 'toastService',
-        function($scope, $routeParams, doctorUserService, bookService, toastService) {
+    .controller('DoctorPanelCtrl', ['$scope', '$routeParams', 'doctorUserService', 'bookService', 'toastService', 'drugService',
+        function($scope, $routeParams, doctorUserService, bookService, toastService, drugService) {
             this.name = "doctorPanelCtrl";
             this.params = $routeParams;
             console.log('doctorPanelCtrl');
@@ -9,7 +9,9 @@ angular.module('database')
             $scope.currentPatient = {};
             $scope.imagePath = "./static/image/head.png";
             $scope.currentPatient = {patientName: '未选择', date: 'N/A'};
+            var drugs = [];
             doctorUserService.getPatientList(doctorUserService.current().doctorId);
+            drugService.fetchDrug();
             $scope.choosePatient = function(patient) {
             	$scope.currentPatient = patient;
             	$scope.currentPatient.drugs = [];
@@ -20,7 +22,7 @@ angular.module('database')
             	_.remove($scope.currentPatient.drugs, drug);
             	console.log($scope.currentPatient.drugs);
             }
-            drugs=['泰诺','康泰克','阿司匹林','头孢克诺','头孢克肟'];
+            //drugs=['泰诺','康泰克','阿司匹林','头孢克诺','头孢克肟'];
             $scope.queryDrugs = function(drug) {
             	return _.filter(drugs,function(n) {
             		return !!~n.indexOf(drug);
@@ -43,6 +45,14 @@ angular.module('database')
                 console.log('getPatientList');
                 console.log(doctorUserService.patientList());
                 $scope.patientList = doctorUserService.patientList();
+            })
+            $scope.$on('fetchDrug', function(event, flag) {
+                if (flag) {
+                    $scope.drugs = drugService.drugList();
+                    drugs = _.pluck($scope.drugs, 'drugName');
+                } else {
+                    toastService.show('获取药品失败')
+                }
             })
             $scope.$on('addTreatment', function(event, flag) {
                 console.log('addTreatment:', flag);

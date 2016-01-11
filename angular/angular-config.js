@@ -38,6 +38,11 @@ angular.module('database', ['ngRoute', 'ngAnimate', 'ngMaterial', 'ngMessages'])
                     templateUrl: 'angular/admin/adminLogin/adminLogin.html',
                     controller: 'AdminLoginCtrl',
                     controllerAs: 'admin'
+                })
+                .when('/admin/panel', {
+                    templateUrl: 'angular/admin/adminPanel/adminPanel.html',
+                    controller: 'AdminPanelCtrl',
+                    controllerAs: 'admin'
                 });
 
         }

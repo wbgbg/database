@@ -1,0 +1,91 @@
+<div class="adminPanelWrap">
+    <div class="adminPanel">
+        <md-content layout="column">
+            <md-tabs md-border-bottom class="adminPanelTabs">
+                <md-tab label="医生管理">
+                    <md-list>
+                        <md-list-item class="md-2-line" ng-repeat="item in doctorList">
+                            <div class="md-list-item-text" layout="column">
+                                <h3>{{ item.doctorName }}</h3>
+                                <h4>{{ item.department }}</h4>
+                                <md-button class="md-secondary md-raised md-primary" ng-click="deleteDoctor(item)">删除</md-button>
+                            </div>
+                        </md-list-item>
+                    </md-list>
+                    <div layout="row" layout-align="center center">
+                        <md-button class="md-raised md-primary" ng-click="addDoctor($event)">新增医生</md-button>
+                    </div>
+                </md-tab>
+                <md-tab label="预约管理">
+                    <md-list class="bookList">
+                        <md-subheader class="md-no-sticky">预约中</md-subheader>
+                        <md-list-item class="md-3-line" ng-repeat="item in bookList | filter:{statue:4}">
+                            <div class="md-list-item-text" layout="column">
+                                <h3>{{ item.department }}</h3>
+                                <h4>{{ item.doctorName }}&nbsp;-&nbsp;{{item.patientName}}</h4>
+                                <p>{{ item.date }}</p>
+                                <md-button class="md-secondary md-raised md-primary" ng-click="checkBook(item,3)">通过</md-button>
+                            </div>
+                        </md-list-item>
+                        <md-subheader class="md-no-sticky">已预约</md-subheader>
+                        <md-list-item class="md-3-line" ng-repeat="item in bookList | filter:{statue:3}">
+                            <div class="md-list-item-text" layout="column">
+                                <h3>{{ item.department }}</h3>
+                                <h4>{{ item.doctorName }}&nbsp;-&nbsp;{{item.patientName}}</h4>
+                                <p>{{ item.date }}</p>
+                            </div>
+                        </md-list-item>
+                        <md-subheader class="md-no-sticky">挂号中</md-subheader>
+                        <md-list-item class="md-3-line" ng-repeat="item in bookList | filter:{statue:2}">
+                            <div class="md-list-item-text" layout="column">
+                                <h3>{{ item.department }}</h3>
+                                <h4>{{ item.doctorName }}&nbsp;-&nbsp;{{item.patientName}}</h4>
+                                <p>{{ item.date }}</p>
+                                <md-button class="md-secondary md-raised md-primary" ng-click="checkBook(item,1)">通过</md-button>
+                            </div>
+                        </md-list-item>
+                        <md-subheader class="md-no-sticky">已挂号</md-subheader>
+                        <md-list-item class="md-3-line" ng-repeat="item in bookList | filter:{statue:1}">
+                            <div class="md-list-item-text" layout="column">
+                                <h3>{{ item.department }}</h3>
+                                <h4>{{ item.doctorName }}&nbsp;-&nbsp;{{item.patientName}}</h4>
+                                <p>{{ item.date }}</p>
+                            </div>
+                        </md-list-item>
+                        <md-subheader class="md-no-sticky">待收费</md-subheader>
+                        <md-list-item class="md-3-line" ng-repeat="item in bookList | filter:{statue:1}">
+                            <div class="md-list-item-text" layout="column">
+                                <h3>{{ item.department }}</h3>
+                                <h4>{{ item.doctorName }}&nbsp;-&nbsp;{{item.patientName}}</h4>
+                                <p>{{ item.date }}</p>
+                                <md-button class="md-secondary md-raised md-primary" ng-click="checkBook(item,0)">收费</md-button>
+                            </div>
+                        </md-list-item>
+                    </md-list>
+                </md-tab>
+                <md-tab label="药品管理">
+                    <md-list>
+                        <md-list-item class="md-2-line" ng-repeat="item in medicineData">
+                            <div class="md-list-item-text" layout="column">
+                                <h3>{{ item.drugName }}</h3>
+                                <h4>{{ item.drugQuantity }}</h4>
+                                <md-button class="md-secondary md-raised md-primary" ng-click="deleteDrug(item)">删除</md-button>
+                            </div>
+                        </md-list-item>
+                    </md-list>
+                    <div layout="row" layout-align="center start">
+                        <md-input-container>
+                            <label>名称</label>
+                            <input ng-model="drug.drugName">
+                        </md-input-container>
+                        <md-input-container>
+                            <label>数量</label>
+                            <input ng-model="drug.drugQuantity">
+                        </md-input-container>
+                        <md-button class="md-raised md-primary" ng-click="addDrug(drug)">新增药品</md-button>
+                    </div>
+                </md-tab>
+            </md-tabs>
+        </md-content>
+    </div>
+</div>

@@ -60,13 +60,30 @@ app.on('ready', function() {
     ipcMain.on('fetchBook', function(event, id) {
         console.log(id);
         console.log('fetchBook'); // prints "ping"
-        connection.queryAsync('SELECT * FROM `[fetch Book]` WHERE patientId=' + id)
+        if (id) {
+            var queryString = 'SELECT * FROM `[fetch Book]` WHERE patientId=' + id;
+        } else {
+            var queryString = 'SELECT * FROM `[fetch Book]`';
+        }
+        connection.queryAsync(queryString) 
         .then(function(ans) {
+            console.log(ans);
             event.sender.send('fetchBook-reply', ans);
         },function(err) {
             console.log(err);
         });
     });
+
+    ipcMain.on('updateBook', function(event, setting) {
+        console.log('updateBook:', 'UPDATE `Book` SET ' + setting.key + '=' + setting.value + ' WHERE bookId=' + setting.bookId);
+        connection.queryAsync('UPDATE `Book` SET ' + setting.key + '=' + setting.value + ' WHERE bookId=' + setting.bookId)
+        .then(function(ans) {
+            event.sender.send('updateBook-reply', true);
+        },function(err) {
+            console.log(err);
+            event.sender.send('updateBook-reply', false);
+        });
+    })
 
     ipcMain.on('patientLogin', function(event, user) {
         console.log('patientLogin');
@@ -94,6 +111,67 @@ app.on('ready', function() {
                 event.sender.send('doctorLogin-reply',ans[0]);
             } else {
                 event.sender.send('doctorLogin-reply');
+            }
+        },function(err) {
+            console.log(err);
+        });
+    });
+
+    ipcMain.on('adminLogin', function(event, user) {
+        console.log('adminLogin');
+        console.log(sha1sum(user.password));
+        connection.queryAsync('SELECT * FROM adminUser WHERE username=\'' + user.username + '\'')
+        .then(function(ans) {
+            console.log(ans[0]);
+            if (ans[0] && (ans[0].password == sha1sum(user.password))) {
+                event.sender.send('adminLogin-reply',ans[0]);
+            } else {
+                event.sender.send('adminLogin-reply');
+            }
+        },function(err) {
+            console.log(err);
+        });
+    });
+
+    ipcMain.on('fetchDoctorList', function(event) {
+        console.log('fetchDoctorList');
+        connection.queryAsync('SELECT * FROM doctorUser')
+        .then(function(ans) {
+            console.log(ans);
+            if (ans[0]) {
+                event.sender.send('fetchDoctorList-reply',ans);
+            } else {
+                event.sender.send('fetchDoctorList-reply');
+            }
+        },function(err) {
+            console.log(err);
+        });
+    });
+
+    ipcMain.on('deleteDoctor', function(event, doctorId) {
+        console.log('deleteDoctor');
+        connection.queryAsync('DELETE FROM doctorUser WHERE doctorId=' + doctorId)
+        .then(function(ans) {
+            console.log(ans);
+            if (ans) {
+                event.sender.send('deleteDoctor-reply', true);
+            } else {
+                event.sender.send('deleteDoctor-reply', false);
+            }
+        },function(err) {
+            console.log(err);
+        });
+    });
+
+    ipcMain.on('addDoctor', function(event, doctor) {
+        console.log('addDoctor');
+        connection.queryAsync('INSERT INTO doctorUser (username, password, doctorName, department) VALUES (?,?,?,?)',[doctor.username, sha1sum(doctor.password), doctor.doctorName, doctor.department])
+        .then(function(ans) {
+            console.log(ans);
+            if (ans) {
+                event.sender.send('addDoctor-reply', true);
+            } else {
+                event.sender.send('addDoctor-reply', false);
             }
         },function(err) {
             console.log(err);
@@ -136,6 +214,53 @@ app.on('ready', function() {
             }
         })
     })
+
+    ipcMain.on('addDrug', function(event, drug) {
+        console.log('addDrug'); // prints "ping"
+        console.dir(drug, {depth:null});
+        connection.queryAsync('INSERT INTO Drug (drugName, drugQuantity) values (?,?)', [drug.drugName, drug.drugQuantity])
+        .then(function(ans) {
+            console.log(ans);
+            if (ans) {
+                event.sender.send('addDrug-reply', true);
+            } else {
+                event.sender.send('addDrug-reply', false);
+            }
+        },function(err) {
+            console.log(err);
+        })
+    });
+
+    ipcMain.on('deleteDrug', function(event, drugId) {
+            console.log('deleteDrug'); // prints "ping"
+            console.dir(drugId, {depth:null});
+            connection.queryAsync('DELETE FROM DRUG WHERE drugId=' + drugId)
+            .then(function(ans) {
+                console.log(ans);
+                if (ans) {
+                    event.sender.send('deleteDrug-reply', true);
+                } else {
+                    event.sender.send('deleteDrug-reply', false);
+                }
+            },function(err) {
+                console.log(err);
+            })
+        });
+
+    ipcMain.on('fetchDrug', function(event) {
+            console.log('fetchDrug'); // prints "ping"
+            connection.queryAsync('SELECT * from drug')
+            .then(function(ans) {
+                if (ans[0]) {
+                    event.sender.send('fetchDrug-reply', ans);
+                } else {
+                    event.sender.send('fetchDrug-reply', false);
+                }
+            },function(err) {
+                console.log(err);
+            })
+        });
+
 
     ipcMain.on('addTreatment', function(event, treatment) {
         console.log('addTreatment:', treatment);

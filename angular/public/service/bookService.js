@@ -12,6 +12,10 @@ angular.module('database')
             addTreatment: function(treatment) {
                 console.log('addTreatment');
                 ipcRenderer.send('addTreatment', treatment);
+            },
+            updateBook: function(setting) {
+                console.log('update:', setting);
+                ipcRenderer.send('updateBook', setting);
             }
         };
         ipcRenderer.on('addBook-reply', function(event, result) {
@@ -31,6 +35,13 @@ angular.module('database')
                 $rootScope.$broadcast('addTreatment', true);
             } else {
                 $rootScope.$broadcast('addTreatment', false);
+            }
+        })
+        ipcRenderer.on('updateBook-reply', function(event, flag) {
+            if (flag) {
+                $rootScope.$broadcast('bookService.update', true);
+            } else {
+                $rootScope.$broadcast('bookService.update', false);
             }
         })
 

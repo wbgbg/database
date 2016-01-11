@@ -5,7 +5,7 @@
                 <md-toolbar md-scroll-shrink>
                     <h4>&nbsp; 病人列表</h4>
                 </md-toolbar>
-                <md-list-item class="md-2-line" ng-repeat="patient in patientList" ng-click="choosePatient(patient)">
+                <md-list-item class="md-2-line" ng-repeat="patient in patientList | filter:{statue:1}" ng-click="choosePatient(patient)">
                     <div class="md-list-item-text" layout="column">
                         <h3>{{ patient.patientName }}</h3>
                         <h4>{{ patient.date }}</h4>
@@ -42,7 +42,7 @@
                 <md-list flex="40" class="drugList">
                     <md-subheader class="md-no-sticky">已开药物</md-subheader>
                     <md-list-item ng-repeat="drug in currentPatient.drugs">
-                        <p>{{drug.name}}&nbsp;{{drug.quentity}}</p>
+                        <p>{{drug.name}}&nbsp;{{drug.quantity}}</p>
                         <md-button class="md-icon-button" aria-label="remove" ng-click="removeDrug(drug)">
                             <md-icon>remove_circle</md-icon>
                         </md-button>

@@ -100,6 +100,13 @@ starting patientPanel
   width:40%;
   margin:0 auto;
 }
+.adminPanel {
+  width:60%;
+  margin:0 auto;
+}
+.adminPanelTabs {
+  height:80%;
+}
 
 .patientPanelTabs {
   height:80%;
@@ -126,7 +133,9 @@ img {
   overflow: scroll;
   max-height: 200px !important;
 }
-
+.bookList {
+  overflow: scroll;
+}
 .view-animate.ng-enter, .view-animate.ng-leave {
   transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 1.5s;
 

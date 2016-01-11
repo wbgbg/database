@@ -1,0 +1,50 @@
+<md-dialog aria-label="增加医生" ng-cloak class="addDoctorDialogWrap">
+    <form>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>增加医生</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <i class="material-icons">cancel</i>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <div class="md-dialog-content">
+                <md-content layout="column" layout-align="space-around center" class="addDoctorDialogForm" layout-padding>
+                    <div layout="row">
+                        <md-input-container>
+                            <label>账号</label>
+                            <input ng-model="doctor.username" class="md-block" required>
+                        </md-input-container>
+                        <md-input-container>
+                            <label>密码</label>
+                            <input ng-model="doctor.password" class="md-block" required>
+                        </md-input-container>
+                    </div>
+                    <div layout="row" layout-align="center start">
+                        <md-input-container>
+                            <label>姓名</label>
+                            <input ng-model="doctor.doctorName" class="md-block" required>
+                        </md-input-container>
+                        <div flex="20"></div>
+                        <md-input-container>
+                            <label>科室</label>
+                            <md-select ng-model="doctor.department">
+                                <md-option ng-repeat="department in optionalDepartment" value="{{department}}">
+                                    {{department}}
+                                </md-option>
+                            </md-select>
+                        </md-input-container>
+                    </div>
+                </md-content>
+            </div>
+        </md-dialog-content>
+        <md-dialog-actions layout="row">
+            <span flex></span>
+            <md-button ng-click="answer('doctor')" style="margin-right:20px;">
+                确认
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>
