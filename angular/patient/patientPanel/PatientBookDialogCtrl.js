@@ -44,7 +44,8 @@ angular.module('database')
                 $mdDialog.cancel();
             };
             $scope.answer = function(answer) {
-                $scope.booking.date = $mdDateLocale.formatDate($scope.date);
+                //$scope.booking.date = $mdDateLocale.formatDate($scope.date);
+                $scope.booking.date = $scope.date.getFullYear() + '/' + ($scope.date.getMonth()+1) + '/' + $scope.date.getDate();
                 $scope.booking.clock = $scope.booking.clock + ':' + $scope.booking.minute;
                 $mdDialog.hide($scope.booking);
             };

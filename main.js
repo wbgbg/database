@@ -42,7 +42,7 @@ app.on('ready', function() {
         'height': 600,
         'resizable': false,
         'accept-first-mouse': true,
-        'title': 'database',
+        'title': '医院信息管理系统',
         'show': false
     });
 
@@ -61,9 +61,9 @@ app.on('ready', function() {
         console.log(id);
         console.log('fetchBook'); // prints "ping"
         if (id) {
-            var queryString = 'SELECT * FROM `[fetch Book]` WHERE patientId=' + id;
+            var queryString = 'SELECT * FROM `[doctor panel patient]` WHERE patientId=' + id;
         } else {
-            var queryString = 'SELECT * FROM `[fetch Book]`';
+            var queryString = 'SELECT * FROM `[doctor panel patient]`';
         }
         connection.queryAsync(queryString) 
         .then(function(ans) {
