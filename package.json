@@ -1,27 +1,21 @@
 {
-  "name": "electron-quick-start",
+  "name": "database",
   "version": "1.0.0",
-  "description": "A minimal Electron application",
+  "description": "A hosipital infomation manage system",
   "main": "main.js",
   "scripts": {
     "start": "electron main.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/atom/electron-quick-start.git"
+    "url": "https://github.com/wbgbg/database.git"
   },
   "keywords": [
-    "Electron",
-    "quick",
-    "start",
-    "tutorial"
+    "database",
+	"HIMS"
   ],
-  "author": "GitHub",
+  "author": "wbgbg",
   "license": "CC0-1.0",
-  "bugs": {
-    "url": "https://github.com/atom/electron-quick-start/issues"
-  },
-  "homepage": "https://github.com/atom/electron-quick-start#readme",
   "devDependencies": {
     "jquery": "2.1.4"
   },
